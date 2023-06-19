@@ -3,7 +3,8 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
@@ -35,7 +36,7 @@ app.use(errorController.get404);
 app.use(errorController.logErrors);
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/blogueTest1')
+mongoose.connect(process.env.CONNECT_STRING)
   .then(() => {
     console.log('La connexion à la base de données est établie')
     app.listen(3000, () => {
